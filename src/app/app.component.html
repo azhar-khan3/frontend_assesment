@@ -1,0 +1,29 @@
+<div class="main-container">
+    <h1>User Dashboard</h1>
+  
+    <div class="search-box">
+      <input type="text" [(ngModel)]="searchTerm" (input)="onSearch()" placeholder="Search by name or email...">
+    </div>
+  
+    <div *ngIf="loading" class="status-msg">Loading...</div>
+    <div *ngIf="errorMessage" class="status-msg error">{{ errorMessage }}</div>
+  
+    <table *ngIf="!loading && !errorMessage">
+      <thead>
+        <tr>
+          <th (click)="sortBy('name')">Name ↕</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th (click)="sortBy('company')">Company Name ↕</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of filteredUsers">
+          <td>{{ user.name }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.phone }}</td>
+          <td>{{ user.company.name }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
